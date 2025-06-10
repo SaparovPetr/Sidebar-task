@@ -1,6 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import babel from 'vite-plugin-babel';
 
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [
+    react(),
+    babel({
+      babelConfig: {
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
+  ],
+});

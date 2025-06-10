@@ -27,6 +27,7 @@ const NavContainer = styled.div`
 	height: calc(76vh - 72px);
 	margin-top: 16px;
 `;
+NavContainer.displayName = "NavContainer";
 
 const SidebarOuterContainer = styled.div`
 	height: 97vh;
@@ -50,6 +51,7 @@ const SidebarOuterContainer = styled.div`
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;
+SidebarOuterContainer.displayName = "SidebarOuterContainer";
 
 const SidebarInnerContainer = styled.div`
 	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
@@ -61,6 +63,7 @@ const SidebarInnerContainer = styled.div`
 			$isOpened ? theme.delayShort : theme.delayMedium};
 	margin: 0 auto;
 `;
+SidebarInnerContainer.displayName = "SidebarInnerContainer";
 
 const LogoArea = styled.div`
 	position: relative;
@@ -115,6 +118,7 @@ const LogoArea = styled.div`
 		}
 	}
 `;
+LogoArea.displayName = "LogoArea";
 
 const NavList = styled.div`
 	display: flex;
@@ -162,6 +166,7 @@ const NavList = styled.div`
 		}
 	}
 `;
+NavList.displayName = "NavList";
 
 const Sidebar = ({ color }) => {
 	const [$isOpened, setIsOpened] = useState(true);
