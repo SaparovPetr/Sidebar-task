@@ -51,7 +51,7 @@ const Sidebar = ({ color }) => {
 						<span>TensorFlow</span>
 
 						<div className="toggle" onClick={toggleSidebar}>
-							<FontAwesomeIcon icon={"angle-right"} $isOpened={$isOpened} />
+							<FontAwesomeIcon icon={"angle-right"} />
 						</div>
 					</LogoArea>
 					<NavContainer>
