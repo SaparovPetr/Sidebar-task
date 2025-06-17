@@ -9,7 +9,7 @@
 
 ## Публикация
 
-[Ссылка на GitHub Pages]().
+[Ссылка на GitHub Pages](https://saparovpetr.github.io/Sidebar-task/).
 
 ## Задание
 
