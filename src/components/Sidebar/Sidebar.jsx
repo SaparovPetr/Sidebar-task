@@ -57,7 +57,7 @@ const Sidebar = ({ color }) => {
 					<NavContainer>
 						<NavList $isOpened={$isOpened}>
 							{routes.map((route) => (
-								<div
+								<li
 									key={route.title}
 									className={`nav-item${
 										selectedPath === route.path ? " selected" : ""
@@ -66,14 +66,14 @@ const Sidebar = ({ color }) => {
 								>
 									<FontAwesomeIcon icon={route.icon} />
 									<span>{route.title}</span>
-								</div>
+								</li>
 							))}
 						</NavList>
 					</NavContainer>
 
 					<NavList $isOpened={$isOpened}>
 						{bottomRoutes.map((route) => (
-							<div
+							<li
 								key={route.title}
 								className={`nav-item${
 									selectedPath === route.path ? " selected" : ""
@@ -82,7 +82,7 @@ const Sidebar = ({ color }) => {
 							>
 								<FontAwesomeIcon icon={route.icon} />
 								<span>{route.title}</span>
-							</div>
+							</li>
 						))}
 					</NavList>
 				</SidebarInnerContainer>

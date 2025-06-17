@@ -106,9 +106,11 @@ export const LogoArea = styled.div`
 	}
 `;
 
-export const NavList = styled.div`
+export const NavList = styled.ul`
 	display: flex;
 	flex-direction: column;
+    padding: 0;
+    margin: 0;
 
 	.nav-item {
 		height: 24px;
