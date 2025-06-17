@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
 import PropTypes from "prop-types";
@@ -19,7 +19,6 @@ const bottomRoutes = [
 	{ title: "Support", icon: "phone-volume", path: "/support" },
 ];
 
-// компоннты
 const NavContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -27,7 +26,6 @@ const NavContainer = styled.div`
 	height: calc(76vh - 72px);
 	margin-top: 16px;
 `;
-NavContainer.displayName = "NavContainer";
 
 const SidebarOuterContainer = styled.div`
 	height: 97vh;
@@ -39,31 +37,32 @@ const SidebarOuterContainer = styled.div`
 	justify-content: space-between;
 
 	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
-	transition: width
-		${({ $isOpened, theme }) =>
-			$isOpened ? theme.fastDuration : theme.slowDuration}
-		${({ theme }) => theme.easeInOut}
-		${({ $isOpened, theme }) =>
-			$isOpened ? theme.delayShort : theme.delayMedium};
+
+	transition-property: width;
+	transition-duration: ${({ $isOpened, theme }) =>
+		$isOpened ? theme.fastDuration : theme.slowDuration};
+	transition-timing-function: ${({ theme }) => theme.easeInOut};
+	transition-delay: ${({ $isOpened, theme }) =>
+		$isOpened ? theme.delayShort : theme.delayMedium};
 
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;
-SidebarOuterContainer.displayName = "SidebarOuterContainer";
 
 const SidebarInnerContainer = styled.div`
 	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
-	transition: width
-		${({ $isOpened, theme }) =>
-			$isOpened ? theme.slowDuration : theme.fastDuration}
-		${({ theme }) => theme.easeInOut}
-		${({ $isOpened, theme }) =>
-			$isOpened ? theme.delayShort : theme.delayMedium};
+
+	transition-property: width;
+	transition-duration: ${({ $isOpened, theme }) =>
+		$isOpened ? theme.slowDuration : theme.fastDuration};
+	transition-timing-function: ${({ theme }) => theme.easeInOut};
+	transition-delay: ${({ $isOpened, theme }) =>
+		$isOpened ? theme.delayShort : theme.delayMedium};
+
 	margin: 0 auto;
 `;
-SidebarInnerContainer.displayName = "SidebarInnerContainer";
 
 const LogoArea = styled.div`
 	position: relative;
@@ -75,8 +74,11 @@ const LogoArea = styled.div`
 		width: 40px;
 		height: 40px;
 		margin-right: ${({ $isOpened }) => ($isOpened ? "8px" : "0")};
-		transition: margin-right ${({ theme }) => theme.mediumDuration}
-			${({ theme }) => theme.ease};
+
+		transition-property: margin-right;
+		transition-duration: ${({ theme }) => theme.mediumDuration};
+		transition-timing-function: ${({ theme }) => theme.ease};
+		transition-delay: 0s;
 	}
 	span {
 		font-size: 1.2rem;
@@ -84,9 +86,12 @@ const LogoArea = styled.div`
 		color: ${({ theme }) => theme.logoColor};
 		white-space: nowrap;
 		opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
-		transition: opacity ${({ theme }) => theme.mediumDuration}
-			${({ theme }) => theme.ease}
-			${({ $isOpened }) => ($isOpened ? "0.2s" : "0s")};
+
+		transition-property: opacity;
+		transition-duration: ${({ theme }) => theme.mediumDuration};
+		transition-timing-function: ${({ theme }) => theme.ease};
+		transition-delay: ${({ $isOpened }) => ($isOpened ? "0.2s" : "0s")};
+
 		cursor: default;
 	}
 
@@ -103,8 +108,10 @@ const LogoArea = styled.div`
 		margin-left: auto;
 		cursor: pointer;
 
-		transition: right ${({ theme }) => theme.mediumDuration}
-			${({ theme }) => theme.ease};
+		transition-property: right;
+		transition-duration: ${({ theme }) => theme.mediumDuration};
+		transition-timing-function: ${({ theme }) => theme.ease};
+		transition-delay: 0s;
 
 		svg {
 			position: absolute;
@@ -113,12 +120,14 @@ const LogoArea = styled.div`
 			transform: translate(-50%, -50%)
 				rotate(${({ $isOpened }) => ($isOpened ? "180deg" : "0deg")});
 			color: ${({ theme }) => theme.textColor};
-			transition: transform ${({ theme }) => theme.mediumDuration}
-				${({ theme }) => theme.ease};
+
+			transition-property: transform;
+			transition-duration: ${({ theme }) => theme.mediumDuration};
+			transition-timing-function: ${({ theme }) => theme.ease};
+			transition-delay: 0s;
 		}
 	}
 `;
-LogoArea.displayName = "LogoArea";
 
 const NavList = styled.div`
 	display: flex;
@@ -134,12 +143,11 @@ const NavList = styled.div`
 		cursor: pointer;
 		color: ${({ theme }) => theme.textColor};
 		background-color: transparent;
-		transition: background-color ${({ theme }) => theme.mediumDuration}
-				${({ theme }) => theme.easeInOut},
-			color ${({ theme }) => theme.mediumDuration}
-				${({ theme }) => theme.easeInOut},
-			opacity ${({ theme }) => theme.mediumDuration}
-				${({ theme }) => theme.easeInOut};
+
+		transition-property: background-color, color, opacity;
+		transition-duration: ${({ theme }) => theme.mediumDuration};
+		transition-timing-function: ${({ theme }) => theme.easeInOut};
+		transition-delay: 0s;
 
 		&:hover {
 			background-color: ${({ theme }) => theme.hoverBackground};
@@ -160,13 +168,14 @@ const NavList = styled.div`
 		span {
 			margin-left: 8px;
 			opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
-			transition: opacity ${({ theme }) => theme.mediumDuration}
-				${({ theme }) => theme.ease}
-				${({ $isOpened }) => ($isOpened ? "0.2s" : "0s")};
+
+			transition-property: opacity;
+			transition-duration: ${({ theme }) => theme.mediumDuration};
+			transition-timing-function: ${({ theme }) => theme.ease};
+			transition-delay: ${({ $isOpened }) => ($isOpened ? "0.2s" : "0s")};
 		}
 	}
 `;
-NavList.displayName = "NavList";
 
 const Sidebar = ({ color }) => {
 	const [$isOpened, setIsOpened] = useState(true);
@@ -184,19 +193,36 @@ const Sidebar = ({ color }) => {
 	};
 
 	return (
-		<SidebarOuterContainer theme={theme} $isOpened={$isOpened}>
-			<SidebarInnerContainer theme={theme} $isOpened={$isOpened}>
-				<LogoArea theme={theme} $isOpened={$isOpened}>
-					<img src={logo} alt="TensorFlow logo" />
-					<span>TensorFlow</span>
+		<ThemeProvider theme={theme}>
+			<SidebarOuterContainer $isOpened={$isOpened}>
+				<SidebarInnerContainer $isOpened={$isOpened}>
+					<LogoArea $isOpened={$isOpened}>
+						<img src={logo} alt="TensorFlow logo" />
+						<span>TensorFlow</span>
 
-					<div className="toggle" onClick={toggleSidebar}>
-						<FontAwesomeIcon icon={"angle-right"} $isOpened={$isOpened} />
-					</div>
-				</LogoArea>
-				<NavContainer>
-					<NavList theme={theme} $isOpened={$isOpened}>
-						{routes.map((route) => (
+						<div className="toggle" onClick={toggleSidebar}>
+							<FontAwesomeIcon icon={"angle-right"} $isOpened={$isOpened} />
+						</div>
+					</LogoArea>
+					<NavContainer>
+						<NavList $isOpened={$isOpened}>
+							{routes.map((route) => (
+								<div
+									key={route.title}
+									className={`nav-item${
+										selectedPath === route.path ? " selected" : ""
+									}`}
+									onClick={() => goToRoute(route.path)}
+								>
+									<FontAwesomeIcon icon={route.icon} />
+									<span>{route.title}</span>
+								</div>
+							))}
+						</NavList>
+					</NavContainer>
+
+					<NavList $isOpened={$isOpened}>
+						{bottomRoutes.map((route) => (
 							<div
 								key={route.title}
 								className={`nav-item${
@@ -209,24 +235,9 @@ const Sidebar = ({ color }) => {
 							</div>
 						))}
 					</NavList>
-				</NavContainer>
-
-				<NavList theme={theme} $isOpened={$isOpened}>
-					{bottomRoutes.map((route) => (
-						<div
-							key={route.title}
-							className={`nav-item${
-								selectedPath === route.path ? " selected" : ""
-							}`}
-							onClick={() => goToRoute(route.path)}
-						>
-							<FontAwesomeIcon icon={route.icon} />
-							<span>{route.title}</span>
-						</div>
-					))}
-				</NavList>
-			</SidebarInnerContainer>
-		</SidebarOuterContainer>
+				</SidebarInnerContainer>
+			</SidebarOuterContainer>
+		</ThemeProvider>
 	);
 };
 
