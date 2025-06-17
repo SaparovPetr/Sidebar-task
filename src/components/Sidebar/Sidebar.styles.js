@@ -9,7 +9,12 @@ export const NavContainer = styled.div`
 `;
 
 export const SidebarOuterContainer = styled.div`
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	height: 97vh;
+	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
 	background-color: ${({ theme }) => theme.sidebarBackground};
 	color: ${({ theme }) => theme.textColor};
 	border-radius: 15px;
@@ -17,23 +22,17 @@ export const SidebarOuterContainer = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 
-	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
-
 	transition-property: width;
 	transition-duration: ${({ $isOpened, theme }) =>
         $isOpened ? theme.fastDuration : theme.slowDuration};
 	transition-timing-function: ${({ theme }) => theme.easeInOut};
 	transition-delay: ${({ $isOpened, theme }) =>
         $isOpened ? theme.delayShort : theme.delayMedium};
-
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 export const SidebarInnerContainer = styled.div`
 	width: ${({ $isOpened }) => ($isOpened ? "250px" : "80px")};
+	margin: 0 auto;
 
 	transition-property: width;
 	transition-duration: ${({ $isOpened, theme }) =>
@@ -41,8 +40,6 @@ export const SidebarInnerContainer = styled.div`
 	transition-timing-function: ${({ theme }) => theme.easeInOut};
 	transition-delay: ${({ $isOpened, theme }) =>
         $isOpened ? theme.delayShort : theme.delayMedium};
-
-	margin: 0 auto;
 `;
 
 export const LogoArea = styled.div`
@@ -61,19 +58,19 @@ export const LogoArea = styled.div`
 		transition-timing-function: ${({ theme }) => theme.ease};
 		transition-delay: 0s;
 	}
+
 	span {
 		font-size: 1.2rem;
 		font-weight: bold;
 		color: ${({ theme }) => theme.logoColor};
 		white-space: nowrap;
 		opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
+		cursor: default;
 
 		transition-property: opacity;
 		transition-duration: ${({ theme }) => theme.mediumDuration};
 		transition-timing-function: ${({ theme }) => theme.ease};
 		transition-delay: ${({ $isOpened }) => ($isOpened ? "0.2s" : "0s")};
-
-		cursor: default;
 	}
 
 	.toggle {
@@ -81,13 +78,12 @@ export const LogoArea = styled.div`
 		right: ${({ $isOpened }) => ($isOpened ? "-10px" : "-30px")};
 		width: 20px;
 		height: 20px;
-
+		padding: 1px;
+		margin-left: auto;
+		border-radius: 50%;
+		cursor: pointer;
 		background-color: ${({ theme, $isOpened }) =>
         $isOpened ? theme.activeButtonBackground : theme.buttonBackground};
-		padding: 1px;
-		border-radius: 50%;
-		margin-left: auto;
-		cursor: pointer;
 
 		transition-property: right;
 		transition-duration: ${({ theme }) => theme.mediumDuration};
@@ -113,15 +109,16 @@ export const LogoArea = styled.div`
 export const NavList = styled.div`
 	display: flex;
 	flex-direction: column;
+
 	.nav-item {
 		height: 24px;
 		margin: 8px 20px;
 		padding: 10px;
 		border-radius: 10px;
-		font-weight: bold;
 		display: flex;
 		align-items: center;
 		cursor: pointer;
+		font-weight: bold;
 		color: ${({ theme }) => theme.textColor};
 		background-color: transparent;
 
