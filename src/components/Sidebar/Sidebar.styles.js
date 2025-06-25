@@ -24,10 +24,10 @@ export const SidebarOuterContainer = styled.div`
 
 	transition-property: width;
 	transition-duration: ${({ $isOpened, theme }) =>
-        $isOpened ? theme.fastDuration : theme.slowDuration};
+		$isOpened ? theme.fastDuration : theme.slowDuration};
 	transition-timing-function: ${({ theme }) => theme.easeInOut};
 	transition-delay: ${({ $isOpened, theme }) =>
-        $isOpened ? theme.delayShort : theme.delayMedium};
+		$isOpened ? theme.delayShort : theme.delayMedium};
 `;
 
 export const SidebarInnerContainer = styled.div`
@@ -36,10 +36,10 @@ export const SidebarInnerContainer = styled.div`
 
 	transition-property: width;
 	transition-duration: ${({ $isOpened, theme }) =>
-        $isOpened ? theme.slowDuration : theme.fastDuration};
+		$isOpened ? theme.slowDuration : theme.fastDuration};
 	transition-timing-function: ${({ theme }) => theme.easeInOut};
 	transition-delay: ${({ $isOpened, theme }) =>
-        $isOpened ? theme.delayShort : theme.delayMedium};
+		$isOpened ? theme.delayShort : theme.delayMedium};
 `;
 
 export const LogoArea = styled.div`
@@ -83,7 +83,7 @@ export const LogoArea = styled.div`
 		border-radius: 50%;
 		cursor: pointer;
 		background-color: ${({ theme, $isOpened }) =>
-        $isOpened ? theme.activeButtonBackground : theme.buttonBackground};
+		$isOpened ? theme.activeButtonBackground : theme.buttonBackground};
 
 		transition-property: right;
 		transition-duration: ${({ theme }) => theme.mediumDuration};
@@ -148,6 +148,7 @@ export const NavList = styled.ul`
 		span {
 			margin-left: 8px;
 			opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
+			pointer-events: ${({ $isOpened }) => ($isOpened ? "auto" : "none")};
 
 			transition-property: opacity;
 			transition-duration: ${({ theme }) => theme.mediumDuration};
